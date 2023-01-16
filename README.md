@@ -12,4 +12,5 @@ A collection of concise write-ups on small things I learn day to day across a va
 - [Linux](#)
 - [NextJS](#)
 - [Prettier](#)
+- [Tailwindcss](#)
 - [TypeScript](#)
