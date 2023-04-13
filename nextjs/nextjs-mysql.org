@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       a43d116e-7cbd-4c31-940a-72f26c1d9c6c
+:END:
+#+title: Nextjs Mysql
+
+* REDDIT: Anyone using node-mysql2 with nextjs 13 app directory?
+** SOLUTION:
+
+Hi I just found a ticket with this error in the mysql2 repo: [[https://github.com/sidorares/node-mysql2/issues/1885]]
+
+Response:Go to next.config.js and inside experimental object add serverComponentsExternalPackages: ["mysql2"],
+
+Then restart the server
+
+Like this:
+
+#+begin_src js
+
+  const nextConfig = {
+    experimental: {
+      appDir: true,
+      serverComponentsExternalPackages: ["mysql2"],
+    },
+  }
+  module.exports = nextConfig
+
+#+end_src
