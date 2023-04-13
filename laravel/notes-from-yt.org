@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       4c3d8de2-436a-461f-af8b-ea63c7899896
+:END:
+#+title: Notes from Youtube
+
+* [[https://youtu.be/zckH4xalOns?list=PL4cUxeGkcC9hL6aCFKyagrT1RCfVN4w2Q][Youtube]]
+* What is Laravel?
+
+- Framework for creating PHP websites
+- Works well with MySQL database
+- Packed with useful features (blade, auth, eloquent)
+
+** MVC Pattern
+
+- Model, View & Controller

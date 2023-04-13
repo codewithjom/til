@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       46eb095f-5abb-4cf9-9945-e8c607e591eb
+:END:
+#+title: Link
+
+* next/link
+
+Client-side transitions between routes can be enabled via the =Link=  component exported by =next/link=.
+
+For an example, consider a =pages= directory with the following files.
+
+- =pages/index.js=
+- =pages/about.js=
+- =pages/blog/[slug].js=
+
+We can have a link to each of these pages like so:
+
+#+begin_src javascript
+
+  import Link from 'next/link'
+
+  function Home() {
+    return (
+      <ul>
+        <li>
+          <Link href='/'>Home</Link>
+        </li>
+        <li>
+          <Link href='/about'>About Us</Link>
+        </li>
+        <li>
+          <Link href='/blog/hello-world'>Blog Post</Link>
+        </li>
+      </ul>
+    )
+  }
+
+  export default Home
+
+#+end_src
+
+* Source
+
+- [[https://nextjs.org/docs/api-reference/next/link]]

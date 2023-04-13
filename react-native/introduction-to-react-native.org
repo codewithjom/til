@@ -1,0 +1,111 @@
+:PROPERTIES:
+:ID:       f49903e4-6a64-4fc8-9b8e-dbe540839e47
+:END:
+#+title: Learn React Native
+
+* Instroduction to React Native
+** Uses of React Native
+
+React Native is an open-source framework for building Android and iOS applications. You can use JavaScript to access your app platform's APIs as well as to describe the UI using React components.
+
+** Native Components
+
+/Native components/ are platform-backed components. These components are invoked with JavaScript using React components. At runtime, React Native creates the corresponding Android and iOS views.
+
+** React Native and Expo
+
+In React Native, the provided framework requires a basic knowledge of Xcode and Android Studio to build apps. Expo is a framework of tools and services for React Native that focuses on letting you build apps without Xcode and Android Studio
+
+** JS and UI Threads
+
+The /JS threads/ executes the bundled JavaScript code, which then sends actions or requests to the /UI thread/.
+
+** Core vs. Native Components
+
+Each /core component/ is implemented using its respective /native component/ counterpart. Because /native components/ are platform-specific, they could look different when rendered on different platforms.
+
+** Entry Point
+
+All functionality of the React Native app must be included in a single React component, exported as default from the /entry point/ file.
+
+#+begin_src js
+
+  import * as React from 'react';
+
+  const App = () => {
+      // All functionality goes here
+  }
+
+  export default App;
+
+#+end_src
+
+** Packages
+
+You can import different packages to gain access to different native APIs or functionality.
+
+#+begin_src js
+
+  import { Camera } from 'expo-camera';
+  import { MapView } from 'react-native-maps';
+
+#+end_src
+
+** Expo SDK
+
+The Expo SDK is a collection of packages that allows access to some of the most-used APIs for all apps.
+
+** Expo CLI
+
+Expo provides a CLI tool as the primary interface for developers to start writing code for a project.
+
+#+begin_src sh
+
+  expo init
+
+#+end_src
+
+** Expo Go
+
+"Expo Go" is a development client for Android and iOS that can load the JS part of the project. This allows you to preview your app in development.
+
+** Expo Snack
+
+"Expo Snack" is a web-based playground that allows you to write and run React Native apps in the browser.
+
+** Benefits and Drawbacks
+
+Expo and React Native are ideal tools when you need (i) to run an app on multiple platforms (ii) direct access to native functionality, and/or (iii) only have basic web development and native platform understanding.
+
+Expo and React Native aren't ideal tools when you need (i) absolute performance, (ii) cutting edge features which are just released by the platform, and/or (iii) complex and big applications.
+
+** Native Code
+
+"Native code" are instructions for how to operate the React Native framework on each platform, such as iOS and Android.
+
+* Core Components
+
+/Core components/ are ready-to-use components available from React Native, which include =<View>=, =<Text>=, =<Image>=, =<ScrollView>=, =<Button>=, and =<TextInput>=.
+
+#+begin_src xml
+
+  <ScrollView>
+    <Text>Some text</Text>
+    <View>
+      <Text>Some more text</Text>
+      <Image
+        source={{ url: 'https://picsum.photos/64/64' }}
+      />
+    </View>
+    <TextInput
+      defaultValue="You can type here"
+    />
+    <Button
+      onPress={ () => {
+        alert('you tapped the button!');
+      }}
+      title="Press Me"
+    />
+  </ScrollView>
+
+#+end_src

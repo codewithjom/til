@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       46d4877b-0757-4415-99cf-0bf8e437fa06
+:END:
+#+title: Prettier Configuration
+
+Prettier is *an opinionated code formatter.* It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
+
+Below is a simple configuration that I need on my projects, to have this config file you need to install through =yarn= to install follow the following command:
+
+#+begin_src sh
+
+  yarn add prettier
+
+#+end_src
+
+Once done, create a file =.prettierrc= on the root folder of the project and paste this configuration.
+
+#+begin_src javascript
+
+  {
+    "arrowParens": "avoid",
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "bracketSpacing": true,
+    "semi": false,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "printWidth": 120
+  }
+
+  #+end_src

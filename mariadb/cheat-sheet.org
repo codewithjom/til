@@ -1,0 +1,65 @@
+:PROPERTIES:
+:ID:       ae009bf8-ca32-4029-86e7-0703d49dc619
+:END:
+#+title: Mariadb Cheat Sheet
+
+* Useful MySQL/MariaDB queries
+** CLI
+*** Log in as root (password is prompted):
+
+#+begin_src shell
+
+  mysql -u root -p
+
+#+end_src
+
+** Queries
+
+| *Task*                            | *Query*                                      |
+|---------------------------------+--------------------------------------------|
+| List databases                  | SHOW DATABASES;                            |
+| Change active database          | USE dbname;                                |
+| Change to the "system" database | USE mysql;                                 |
+| Show tables in active database  | SHOW TABLES;                               |
+| Show table properties           | DESCRIBE tablename;                        |
+| List all users                  | SELECT user,host,password FROM mysql.user; |
+| List database                   | SELECT host,db,user FROM mysql.db;         |
+| Quit                            | exit or Ctrl+D                             |
+
+** Create Database
+
+#+begin_src sql
+
+  CREATE DATABASE testDB;
+
+#+end_src
+
+** Drop Database
+
+#+begin_src sql
+
+  DROP DATABASE testDB;
+
+#+end_src
+
+** Create Table
+
+#+begin_src sql
+
+  CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+  );
+
+#+end_src
+
+** Drop Table
+
+#+begin_src sql
+
+  DROP TABLE Shippers;
+
+#+end_src

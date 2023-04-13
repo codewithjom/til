@@ -1,0 +1,106 @@
+:PROPERTIES:
+:ID:       231a2988-5b9b-43ca-8531-dbf490b85ad5
+:END:
+#+title: Expo
+
+* https://expo.dev/
+* Installation
+
+To develop applications with Expo, you need two tools. A command-line tool called =Expo CLI= to serve your project, and a mobile client app called =Expo Go= to open the project on Android and iOS platforms. Additionally, you can use any web browser to run the project on the web.
+
+NOTE: You don't need macOS to build an iOS app with =EAS=. You only need an iOS device to run =development builds=. Windows, Linux, and macOS are all supported as your development machine.
+
+** Expo CLI
+
+=Expo CLI= is a command-line tool that is the primary interface between a developer and other Expo tools. You are going to use it for different tasks in the development life cycle of you project such as serving the project in development, viewing logs, opening the app on an emulator or a physical device, and so on.
+
+*** Requirements
+
+To use Expo CLI, you need to have the following tools installed on your developer machine:
+
+- NodeJS (latest)
+- Git
+- Watchman (for macOS or Linux users)
+
+*** Using Expo CLI
+
+Expo CLI is part of the =expo= package, and you can use it by leveraging =npx= -- a Node.js package runner. No installation is required.
+
+For example, to see a list of available commands in Expo CLI, open the terminal on your development machine and run the following command:
+
+#+begin_src sh
+
+  npx expo -h
+
+#+end_src
+
+Now, run the following command:
+
+#+begin_src sh
+
+  npx expo whoami
+
+#+end_src
+
+This command checks which Expo account is currently authenticated on your machine. You will see a *Not logged in* message since you are not logged in to an Expo account. You do not need an account to start and can proceed further with your project. However, if you want to register a new Expo account, run the following command to register a new account:
+
+#+begin_src sh
+
+  npx expo register
+
+#+end_src
+
+If you already have an Expo account, you can log in to it by running the command:
+
+#+begin_src sh
+
+  npx expo login
+
+#+end_src
+
+** Expo Go app for Android and iOS
+
+The fastest way to get up and running is to use the =Expo Go= client app on your Android or iOS device. It allows you to open up apps served through Expo CLI and run your projects faster when developing them. It is available on both the Android Play Store and iOS App Store.
+
+- [[https://play.google.com/store/apps/details?id=host.exp.exponent&pli=1][Android Play Store]]
+- [[https://apps.apple.com/app/expo-go/id982107779][iOS App Store]]
+
+Open the Expo Go app after it has finished installing. If you have created an account with Expo CLI, you can sign in by clicking the *Login* button in the top header on the *Home* tab. Signing in will make it easier for you to open projects in the Expo Go app while developing them -- they will appear automatically under the *Projects* section on the Home tab of the app.
+
+NOTE: Sometimes, it can be useful to run your app directly on your computer instead of on a separate physical device.
+
+* Create a new app
+
+Before creating a new Expo app, you have to make sure that:
+
+- Expo CLI is working on your development machine
+- Expo Go app is installed on your Android or iOS physical device or emulator/simulator
+
+** Initializing the project
+
+To initialize a new project, use =create-expo-app=:
+
+#+begin_src sh
+
+  npx create-expo-app my-app
+  cd my-app
+
+#+end_src
+
+NOTE: You can also use the =--template= option with the =create-expo-app= command. Run =npx create-expo-app --template= to see the list of available templates.
+
+** Starting the developer server
+
+Start the development server by running the following command:
+
+#+begin_src sh
+
+  npx expo start
+
+#+end_src
+
+When you run =npx expo start= (or =yarn expo start=), Expo CLI starts =Metro Bundler=. This bundler is an HTTP server that compiles the JavaScript code of your app using =Babel= and serves it to the Expo app.
+
+** Making your first change
+
+Open *App.js* file in your code editor and change the text "Hello, world!". You are going to see it update on your device. This is great progress! You now have the Expo toolchain running on your machine, can edit the source code for a project, and see the changes live on your device.

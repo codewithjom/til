@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       f6097424-05d4-447b-8826-0d1a6ac8f60d
+:END:
+#+title: Create NextJS
+
+** Installation
+
+Use =npm= to install nextjs.
+
+#+begin_src sh
+
+  # install by using javascript
+  npm create next-app@latest project-name
+
+  # install by using typescript
+  npm create next-app@latest --typescript project-name
+
+#+end_src
+
+To use the experimental or the beta version:
+
+#+begin_src sh
+
+  npx create-next-app@latest --experimental-app
+
+#+end_src

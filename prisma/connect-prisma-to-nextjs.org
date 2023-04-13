@@ -1,0 +1,129 @@
+:PROPERTIES:
+:ID:       b791d7c7-00ee-40dd-ae13-6d5eba23231d
+:END:
+#+title: Connect Prisma to NextJS
+
+* Installation
+
+#+begin_src sh
+
+  yarn add -D prisma
+  yarn add @prisma/client
+
+#+end_src
+
+* Initialize
+
+This will create a folder *prisma* and inside the folder it will contain a file *schema.prisma*. It will also create a file *.env* in the root folder.
+
+#+begin_src sh
+
+  yarn prisma init
+
+#+end_src
+
+Let's use sqlite inside the *schema.prisma* file. But you can use any database like mysql, postgreSQL, etc.
+
+#+begin_src prisma
+
+  datasource db {
+    provide = "sqlite"
+    url     = "file:./dev.db"
+  }
+
+#+end_src
+
+* Migrate
+
+Once you are done creating a model inside the *schema.prisma* run the following:
+
+#+begin_src sh
+
+  yarn prisma migrate dev
+
+#+end_src
+
+* Studio
+
+You can also use the *prisma studio*:
+
+#+begin_src sh
+
+  yarn prisma studio
+
+#+end_src
+
+* PrismaClient
+
+This is how to create a query in getting the data from prisma. In this case we are assuming that we have contacts in the database.
+
+#+begin_src typescript
+
+  import { PrismaClient } from '@prisma/client';
+
+  const prisma = new PrismaClient();
+
+  export async function getServerProps() {
+    const contacts = await prisma.contact.findMany();
+    return {
+      props: {
+        initialContact: contacts
+      }
+    };
+  }
+
+  async function savedContact(contact) {
+    const response = await fetch('/api/contacts', {
+      method: 'POST',
+      body: JSON.stringify(contact)
+    });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    return await response.json();
+  }
+
+#+end_src
+
+Let's put these codes inside the =/api/contacts.ts=:
+
+#+begin_src typescript
+
+  import type { NextApiRequest, NextApiResponse } from 'next';
+  import { PrismaClient } from '@prisma/client';
+
+  const prisma = new PrismaClient();
+
+  export default async (req: NextApiRequest, res: NextApiResponse) => {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ message: 'Method not allowed' });
+    }
+
+    const contactData = JSON.parse(req.body);
+
+    const savedContact = await prisma.contact.create({
+      data: contactData
+    })
+
+    res.json(savedContact);
+  }
+
+#+end_src
+
+Add the following code to your form.
+
+#+begin_src typescript
+
+  onSubmit={async (data, e) => {
+    try {
+      await saveContact(data);
+      setContacts([...contacts, data]);
+      e.target.reset();
+      } catch (err) {
+        console.log(err);
+      }
+    }}
+
+#+end_src

@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       00e7e0fe-3b0a-414e-b1ff-caac9d06ce3f
+:END:
+
+#+title: How to Remove (Delete) Symbolic Links in Linux
+
+#+begin_src sh
+
+  rm symlink_name
+
+#+end_src
+
+#+begin_src sh
+
+  rm symlink1 symlink2
+
+#+end_src
+
+Link: [[https://linuxize.com/post/how-to-remove-symbolic-links-in-linux/]]

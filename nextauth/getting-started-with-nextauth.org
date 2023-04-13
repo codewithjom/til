@@ -1,0 +1,153 @@
+:PROPERTIES:
+:ID:       ee30a290-c42f-4b2b-9900-3a58d56ceefc
+:END:
+#+title: Getting Started with NextAuth
+
+* Getting Started
+
+The example code below describes how to add authentication to a Next.js app.
+
+** Install NextAuth
+
+#+begin_src sh
+
+  yarn add next-auth
+
+#+end_src
+
+** Add API route
+
+To add NextAuth.js to a project create a file called =[...nextauth].js= in =pages/api/auth=. This contains the dynamic route handler for NextAuth.js which also contain all of your global NextAuth.js configurations.
+
+#+begin_src js
+
+  import NextAuth from "next-auth"
+  import GithubProvider from "next-auth/providers/github"
+
+  export const authOptions = {
+      // Configure one or more authentication providers
+      providers: [
+          GithubProvider({
+              clientId: process.env.GITHUB_ID,
+              clientSecret: process.env.GITHUB_SECRET,
+          }),
+          // ...add more providers here
+      ],
+  }
+
+  export default NextAuth(authOptions)
+
+#+end_src
+
+All requests to =/api/auth/*= (=signIn=, =callback=, =signout=, etc.) will automatically be handled by NextAuth.js.
+
+* Providers
+** Google
+*** Documentation
+
+[[https://developers.google.com/identity/protocols/oauth2]]
+
+*** Configuration
+
+[[https://console.developers.google.com/apis/credentials]]
+
+The "Authorized redirect URIs" used when creating the credentials must include your full domain and end in the callback path. For example:
+
+- For production: =https://{YOUR_DOMAIN}/api/auth/callback/google=
+- For development: =http://localhost:3000/api/auth/callback/google=
+
+* Adapters
+** Prisma
+
+To use this Adapter, you need to install Prisma Client, Prisma CLI, and the separate =@next-auth/prisma-adapter= package:
+
+#+begin_src sh
+
+  yarn add next-auth @prisma/client @next-auth/prisma-adapter
+
+#+end_src
+
+*Note*: If you already installed prisma and next-auth you can install =@next-auth/prisma-adapter= instead.
+
+Configure your NextAuth.js to use the Prisma Adapter:
+
+#+begin_src js
+
+  import NextAuth from 'next-auth'
+  import GoogleProvider from 'next-auth/providers/google'
+  import { PrismaAdapter } from '@next-auth/prisma-adapter'
+  import prisma from '../../../prisma/client'
+
+  export default NextAuth({
+    adapter: PrismaAdapter(prisma),
+    providers: [
+      GoogleProvider({
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      })
+    ]
+  })
+
+#+end_src
+
+Create a file =.env.local= in your root directory. DO NOT USE THIS CODE, CREATE NEW CLIENT INSTEAD (check Providers section).
+
+#+begin_src text
+
+  GOOGLE_CLIENT_ID=387763839776-c6v2ab28vlo7gqidcltjehcfvgmj8pq8.apps.googleusercontent.com
+  GOOGLE_CLIENT_SECRET=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
+
+#+end_src
+
+*** Create the Prisma schema
+
+Add this to =prisma/schema.prisma= let nextauth store the data in your database.
+
+#+begin_src prisma
+
+  model Account {
+    id                 String  @id @default(cuid())
+    userId             String
+    type               String
+    provider           String
+    providerAccountId  String
+    refresh_token      String?  @db.Text
+    access_token       String?  @db.Text
+    expires_at         Int?
+    token_type         String?
+    scope              String?
+    id_token           String?  @db.Text
+    session_state      String?
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+  }
+
+  model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  }
+
+  model User {
+    id            String    @id @default(cuid())
+    name          String?
+    email         String?   @unique
+    emailVerified DateTime?
+    image         String?
+    accounts      Account[]
+    sessions      Session[]
+  }
+
+  model VerificationToken {
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+  }
+
+#+end_src

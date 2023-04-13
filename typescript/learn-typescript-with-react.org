@@ -1,0 +1,257 @@
+:PROPERTIES:
+:ID:       29d2d516-8ed0-4e81-ad9f-a271ccf5e617
+:END:
+#+title: Learn TypeScript With React
+
+* https://youtu.be/kq6IhAZVNh8
+* React Hooks
+** Use State
+
+Error on =changeTitle= (holding an int value) because the =useState= uses an empty string:
+
+#+begin_src typescript
+
+  "use client";
+
+  import { useState } from "react";
+
+  export default function App() {
+    const [postTitle, setPostTitle] = useState("");
+
+    const changeTitle = () => {
+      setPostTitle(34);
+    };
+
+    return (
+      <div>
+        <h1>{postTitle}</h1>
+      </div>
+    );
+  }
+
+#+end_src
+
+One way to fix the problem:
+
+#+begin_src typescript
+
+  "use client";
+
+  import { useState } from "react";
+
+  export default function App() {
+    const [postTitle, setPostTitle] = useState<string | null>("");
+
+    const changeTitle = () => {
+      setPostTitle(null);
+    };
+
+    return (
+      <div>
+        <h1>{postTitle}</h1>
+      </div>
+    );
+  }
+
+#+end_src
+
+** Types
+
+Always remember if you want to fetch data you also need to include tye =type= object:
+
+#+begin_src typescript
+
+  import Link from "next/link";
+  import { Inter } from "next/font/google";
+
+  const inter = Inter({ subsets: ["latin"] });
+
+  type PostProps = {
+    id: number;
+    title: string;
+    message?: string;
+  }[];
+
+  async function getPosts(): Promise<PostProps> {
+    const res = await fetch(`${process.env.BASE_URL}/api/getPosts`);
+
+    if (!res.ok) {
+      throw new Error("failed to fetch");
+    }
+
+    return res.json();
+  }
+
+  export default async function Home() {
+    const data = await getPosts();
+
+    return (
+      <main className={inter.className}>
+        <Link href={"/dashboard"}>Go to dashboard</Link>
+        {data.map((post) => (
+          <h2 key={post.id}>{post.title}</h2>
+        ))}
+      </main>
+    );
+  }
+
+#+end_src
+
+** Children
+
+This is the best practice if your project will have a lot of components and data to fetch.
+
+*Post.tsx*
+
+#+begin_src typescript
+
+  "use client";
+
+  type PostProps = {
+    id: number;
+    title: string;
+    toggle: false;
+  };
+
+  export default function Post({ id, title, toggle }: PostProps) {
+    return (
+      <div>
+        <h1>hello</h1>
+        <button></button>
+      </div>
+    );
+  }
+
+#+end_src
+
+*page.tsx*
+
+#+begin_src typescript
+
+  import Link from "next/link";
+  import { Inter } from "next/font/google";
+  import Post from "./Post";
+
+  const inter = Inter({ subsets: ["latin"] });
+
+  type PostProps = {
+    id: number;
+    title: string;
+    message?: string;
+  }[];
+
+  async function getPosts(): Promise<PostProps> {
+    const res = await fetch(`${process.env.BASE_URL}/api/getPosts`);
+
+    if (!res.ok) {
+      throw new Error("failed to fetch");
+    }
+
+    return res.json();
+  }
+
+  export default async function Home() {
+    const data = await getPosts();
+
+    return (
+      <main className={inter.className}>
+        <Link href={"/dashboard"}>Go to dashboard</Link>
+        {data.map((post) => (
+          <Post id={post.id} title={post.title} toggle={false} />
+        ))}
+      </main>
+    );
+  }
+
+#+end_src
+
+What if you don't want to include toggle in the =page.tsx=?
+
+All you need is to use the optional operator =?=. Add the operator inside the object and you can now either remove the /toggle/ in your =page.tsx=.
+
+*Post.tsx*
+
+#+begin_src typescript
+
+  "use client";
+
+  type PostProps = {
+    id: number;
+    title: string;
+    toggle?: false;
+  };
+
+  export default function Post({ id, title, toggle }: PostProps) {
+    return (
+      <div>
+        <h1>hello</h1>
+        <button></button>
+      </div>
+    );
+  }
+
+#+end_src
+
+If you want to use a *string* inside the an optional variable:
+
+#+begin_src typescript
+
+  "use client";
+
+  type PostProps = {
+    id: number;
+    title: string;
+    toggle?: 'open' | 'close';
+  };
+
+  export default function Post({ id, title, toggle }: PostProps) {
+    return (
+      <div>
+        <h1>hello</h1>
+        <button></button>
+      </div>
+    );
+  }
+
+#+end_src
+
+*page.tsx*
+
+#+begin_src typescript
+
+  import Link from "next/link";
+  import { Inter } from "next/font/google";
+  import Post from "./Post";
+
+  const inter = Inter({ subsets: ["latin"] });
+
+  type PostProps = {
+    id: number;
+    title: string;
+    message?: string;
+  }[];
+
+  async function getPosts(): Promise<PostProps> {
+    const res = await fetch(`${process.env.BASE_URL}/api/getPosts`);
+
+    if (!res.ok) {
+      throw new Error("failed to fetch");
+    }
+
+    return res.json();
+  }
+
+  export default async function Home() {
+    const data = await getPosts();
+
+    return (
+      <main className={inter.className}>
+        <Link href={"/dashboard"}>Go to dashboard</Link>
+        {data.map((post) => (
+          <Post id={post.id} title={post.title} toggle="close" />
+        ))}
+      </main>
+    );
+  }
+
+#+end_src

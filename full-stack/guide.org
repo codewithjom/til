@@ -1,0 +1,44 @@
+#+title: A Simple Guide To Start A Project
+
+* NextJS - React Framework
+
+In this guide you are going to use NextJS a React framework.
+
+- [[file:~/notes/til/nextjs/getting-started-with-nextjs.org][Getting Started With NextJS]]
+
+* Prettier - Code Formatter
+
+Use this to format your code I know you need this 😳
+
+- [[file:~/notes/til/prettier/configuration.org][Configuration]]
+
+* Tailwindcss - CSS Framework
+
+Also this you need me too 😉
+
+- [[file:~/notes/til/tailwindcss/add-tailwindcss-in-nextjs.org][Add Tailwindcss in NextJS]]
+
+* Railway - A deployment platform
+
+This is where the url for =.env= file lives.
+
+- [[https:railway.app]]
+
+* Prisma - ORM database
+
+duhh 🙄 database!
+
+- [[file:~/notes/til/prisma/getting-started-with-prisma.org][Getting Started with Prisma]]
+
+*NOTE*: If you already created a model inside the =schema.prisma= do this instead:
+
+#+begin_src sh
+
+  yarn prisma migrate dev
+
+#+end_src
+
+Use this command to update or to push your model to create a SQL migration if you are using Railway or MariaDB etc.
+
+* NextAuth - Authentication for Next.js
+* TanStack - React query

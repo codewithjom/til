@@ -1,0 +1,73 @@
+:PROPERTIES:
+:ID:       3fe6aee2-e3b0-4977-a11d-6e9e82db4174
+:END:
+#+title: Function And Directives
+
+[[https://tailwindcss.com/docs/functions-and-directives]]
+
+* Directives
+
+Directives are custom Tailwind-specific at-rules you can use in your CSS that offer special functionality for Tailwind CSS projects.
+
+* =@tailwind=
+
+Use the =@tailwind= directive to insert Tailwind’s =base=, =components=, =utilities= and =variants= styles into your CSS.
+
+#+begin_src css
+
+  /**
+   ,* This injects Tailwind's base styles and any base styles registered by
+   ,* plugins.
+   ,*/
+  @tailwind base;
+
+  /**
+   ,* This injects Tailwind's component classes and any component classes
+   ,* registered by plugins.
+   ,*/
+  @tailwind components;
+
+  /**
+   ,* This injects Tailwind's utility classes and any utility classes registered
+   ,* by plugins.
+   ,*/
+  @tailwind utilities;
+
+  /**
+   ,* Use this directive to control where Tailwind injects the hover, focus,
+   ,* responsive, dark mode, and other variants of each class.
+   ,*
+   ,* If omitted, Tailwind will append these classes to the very end of
+   ,* your stylesheet by default.
+   ,*/
+  @tailwind variants;
+
+#+end_src
+
+* =@layer=
+
+Use the =@layer= directive to tell Tailwind which “bucket” a set of custom styles belong to. Valid layers are =base=, =components=, and =utilities=.
+
+#+begin_src css
+
+  @tailwind base; @tailwind components; @tailwind utilities; @layer base {h1 {@apply text-2xl;} h2 {
+      @apply text-xl;
+    }
+  }
+
+  @layer components {
+    .btn-blue {
+      @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+    }
+  }
+
+  @layer utilities {
+    .filter-none {
+      filter: none;
+    }
+    .filter-grayscale {
+      filter: grayscale(100%);
+    }
+  }
+
+#+end_src

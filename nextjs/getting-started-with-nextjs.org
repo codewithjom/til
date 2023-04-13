@@ -1,0 +1,35 @@
+#+title: Gettings Started with NextJS
+
+* Automatic Setup
+
+We recommend creating a new Next.js app using =create-next-app=, which sets up everything automatically for you. (You don't need to create an empty directory. =create-next-app= will make one for you). To create a project, run:
+
+#+begin_src sh
+
+  npx create-next-app@latest
+  # or
+  yarn create next-app
+  # or
+  pnpm create next-app
+
+#+end_src
+
+If you want to start with a TypeScript project you can use the =--typescript= flag:
+
+#+begin_src sh
+
+  npx create-next-app@latest --typescript
+  # or
+  yarn create next-app --typescript
+  # or
+  pnpm create next-app --typescript
+
+#+end_src
+
+After the installation is complete:
+
+- Run =npm run dev= or =yarn dev= or =pnpm dev= to start the development server on =http://localhost:3000=
+
+- Visit =http://localhost:3000= to view your application
+
+- Edit =pages/index.js= and see the updated result in your browser

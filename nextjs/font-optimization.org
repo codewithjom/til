@@ -1,0 +1,87 @@
+:PROPERTIES:
+:ID:       8b9fa20c-af07-43c3-a4fc-89f10d904735
+:END:
+#+title: Font Optimization
+
+=@next/font= will automatically optimize your fonts (including custom fonts) and remove external network request for improved privacy and performance.
+
+* Overview
+
+=@next/font= includes *built-in automatic self-hosting* for /any/ font file. This means you can optimally load web fonts with zero layout shift, thanks to the underlying CSS =size-adjust= property used.
+
+* Google Fonts
+
+Automatically self-host any Google Font. Fonts are included in the deployment and served from the same domain as your deployment. *No requests are sent to Google by the browser*.
+
+To use the font in all your pages, add it to =_app.ts= file under =/pages= as shown below:
+
+#+begin_src typescript
+
+  // pages/_app.ts
+
+  import { Inter } from '@next/font/google'
+
+  // If loading a variable font, you don't need to specify the font weight
+  const inter = Inter({ subsets: ['latin'] })
+
+  export default function MyApp({ Component, pageProps }) {
+    return (
+      <main className={inter.className}>
+        <Component {...pageProps} />
+      </main>
+    )
+  }
+
+#+end_src
+
+If you can't use a variable font, you will *need to specify a weight*.
+
+#+begin_src typescript
+
+  // page/_app.ts
+  import { Roboto } from '@next/font/google'
+
+  const roboto = Roboto({ weight: '400', subsets: ['latin'], })
+
+  export default function MyApp({ Component, pageProps }) {
+    return (
+      <main className={roboto.className}>
+        <Component {...pageProps} />
+      </main>
+    )
+  }
+
+#+end_src
+
+You can specify multiple weights and/or styles by using an array.
+
+#+begin_src typescript
+
+  const roboto = Roboto({
+    weight: ['400', '700'],
+    style: ['normal', 'italic'],
+    subsets: ['latin'],
+  })
+
+#+end_src
+
+*** Single page usage
+
+To use the font on a single page, add it to the specifc page as shown below:
+
+#+begin_src typescript
+
+  // pages/index.ts
+  import { Inter } from '@next/font/google'
+
+  const inter = Inter({ subsets: ['latin'] })
+
+  export default function Home() {
+    return (
+      <div className={inter.className}>
+        <p>Hello World</p>
+      </div>
+    )
+  }
+
+#+end_src

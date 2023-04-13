@@ -1,0 +1,271 @@
+:PROPERTIES:
+:ID:       324cfa10-4376-442e-af0a-23754485561a
+:END:
+#+title: Getting Started With Tailwindcss
+
+* [[https://tailwindcss.com/docs/installation]]
+
+Tailwind CSS works by scanning all of your HTML files, JavaScript components, and any other templates for class names, generating the corresponding styles and then writing them to a static CSS file.
+
+It's fast, flexible, and reliable -- with zero-runtime.
+
+* Installation
+** Tailwind CLI
+
+The simplest and fastest way to get up and running with Tailwind CSS from scratch is with the Tailwind CLI tool. The CLI is also available as a *standalone executable* if you want to use it without installing Node.js
+
+1. *Install Tailwind CSS*
+
+   Install =tailwindcss= via npm, and create your =tailwind.config.js= file.
+
+   #+begin_src shell
+
+     npm install -D tailwindcss
+     npx tailwindcss init
+
+   #+end_src
+
+2. *Configure your template paths*
+
+   Add the paths to all of your template files in your =tailwind.config.js= file.
+
+   #+begin_src shell
+
+     /** @type {import('tailwindcss').Config} */
+     module.exports = {
+       content: ["./src/**/*.{html,js}"],
+       theme: {
+         extend: {},
+       },
+       plugins: [],
+     }
+
+   #+end_src
+
+3. *Add the Tailwind directives to your CSS*
+
+   Add the =@tailwind= directives for each of Tailwind's layers to your main CSS file.
+
+   #+begin_src css
+
+     @tailwind base;
+     @tailwind components;
+     @tailwind utilities;
+
+   #+end_src
+
+4. *Start the Tailwind CLI build process*
+
+   Run the CLI tool to scan your template files for classes and build your CSS.
+
+   #+begin_src shell
+
+     npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
+
+   #+end_src
+
+5. *Start using Tailwind in your HTML*
+
+   Add your compiled CSS file to the =<head>= and start using Tailwind's utility classes to style your content.
+
+   #+begin_src web-mode
+
+     <!doctype html>
+     <html>
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link href="/dist/output.css" rel="stylesheet">
+     </head>
+     <body>
+       <h1 class="text-3xl font-bold underline">Hello world!</h1>
+     </body>
+     </html>
+
+   #+end_src
+
+** Framework Guides
+*** Next.js
+
+Setting up Tailwind CSS in a Next.js project.
+
+1. *Install Tailwind CSS*
+
+   Install =tailwindcss= and its peer dependencies via npm, and then run the init command to generate both =tailwind.config.js= and =postcss.config.js=.
+
+   #+begin_src shell
+
+     npm install -D tailwindcss postcss autoprefixer
+     npx tailwindcss init -p
+
+   #+end_src
+
+2. *Configure your template paths*
+
+   Add the paths to all of your template files in your =tailwind.config.js= file.
+
+   #+begin_src javascript
+
+     /** @type {import('tailwindcss').Config} */
+     module.exports = {
+       content: [
+         "./app/**/*.{js,ts,jsx,tsx}",
+         "./pages/**/*.{js,ts,jsx,tsx}",
+         "./components/**/*.{js,ts,jsx,tsx}",
+
+         // Or if using `src` directory:
+         "./src/**/*.{js,ts,jsx,tsx}",
+       ],
+       theme: {
+         extend: {},
+       },
+       plugins: [],
+     }
+
+   #+end_src
+
+3. *Add the Tailwind directives to your CSS*
+
+   Add the =@tailwind= directives for each Tailwind's layers to your =globals.css= file.
+
+   #+begin_src css
+
+     @tailwind base;
+     @tailwind components;
+     @tailwind utilities;
+
+   #+end_src
+
+4. *Start your build process*
+
+   Run your build process with =npm run dev=.
+
+   #+begin_src shell
+
+     npm run dev
+
+   #+end_src
+
+5. *Start using Tailwind in your project*
+
+   Start using Tailwind's utility classes to style your content.
+
+   #+begin_src typescript
+
+     export default function Home() {
+       return (
+         <h1 className="text-3xl font-bold underline">
+           Hello world!
+         </h1>
+       )
+     }
+
+   #+end_src
+
+** Play CDN
+
+Use the Play CDN to try Tailwind right in the browser without any build step. The Play CDN is designed for development purposes only, and is not the best choice for production.
+
+1. *Add the Play CDN script to your HTML*
+
+   Add the Play CDN script tag to the =<head>= of your HTML file, and start using Tailwind's utility classes to style your content.
+
+   #+begin_src web-mode
+
+     <!doctype html>
+     <html>
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <script src="https://cdn.tailwindcss.com"></script>
+     </head>
+     <body>
+       <h1 class="text-3xl font-bold underline">Hello world!</h1>
+     </body>
+     </html>
+
+   #+end_src
+
+2. *Try customizing your config*
+
+   Edit the =tailwind.config= object to _customize your configuration_ with your own design tokens.
+
+   #+begin_src web-mode
+
+     <!doctype html>
+     <html>
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <script src="https://cdn.tailwindcss.com"></script>
+       <script>
+         tailwind.config = {
+           theme: {
+             extend: {
+               colors: {
+                 clifford: '#da373d',
+               }
+             }
+           }
+         }
+       </script>
+     </head>
+     <body>
+       <h1 class="text-3xl font-bold underline text-clifford">
+         Hello world!
+       </h1>
+     </body>
+     </html>
+
+   #+end_src
+
+3. *Try adding some custom CSS*
+
+   Use /type="text/tailwindcss"/ to add custom CSS that supports all of Tailwind's CSS features.
+
+   #+begin_src web-mode
+
+     <!doctype html>
+     <html>
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <script src="https://cdn.tailwindcss.com"></script>
+       <style type="text/tailwindcss">
+         @layer utilities {
+           .content-auto {
+             content-visibility: auto;
+           }
+         }
+       </style>
+     </head>
+     <body>
+       <div class="lg:content-auto">
+         <!-- ... -->
+       </div>
+     </body>
+     </html>
+
+   #+end_src
+
+4. *Try using a first-party plugin*
+
+   Enable first-party plugins, like forms and typography, using the =plugins= query parameter.
+
+   #+begin_src web-mode
+
+     <!doctype html>
+     <html>
+     <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+     </head>
+     <body>
+       <div class="prose">
+         <!-- ... -->
+       </div>
+     </body>
+     </html>
+
+   #+end_src

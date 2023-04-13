@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       cd35e001-448c-400a-9979-8b0b4f0bd89f
+:END:
+#+title: Tailwind navbar
+
+* Link
+
+- [[https://freefrontend.com/tailwind-navbars/]]
+- [[https://tailwindcomponents.com/component/navbar-using-css-only]]

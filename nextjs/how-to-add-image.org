@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       eecdfd42-599b-4d1b-9234-d85de346a56c
+:END:
+#+title: How To Add Image
+
+* Optional Props
+
+The =<Image />= component accepts a number of additional properties beyong those which are required.
+
+Here is an example of using a custom loader:
+
+#+begin_src typescript
+
+  import Image from 'next/image'
+
+  const myLoader = ({ src, width, quality }) => {
+    return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+  }
+
+  const MyImage = (props) => {
+    return (
+      <Image
+        loader={myLoader}
+        src="me.png"
+        alt="Picture of the author"
+        width={500}
+        height={500}
+      />
+    )
+  }
+
+#+end_src
+
+The easiest way to use =<Image />=.
+
+#+begin_src typescript
+
+  import Image from 'next/image'
+
+  <Image src="/example.png" width={500} height={500} alt="example" />
+
+#+end_src

@@ -1,0 +1,40 @@
+#+title: The Best Toast in Town | Smoking hot React notification
+
+* Getting Started
+
+Add beautiful notifications to your React app with =react-hot-toast=.
+
+** Install with Yarn
+
+#+begin_src sh
+
+  yarn add react-hot-toast
+
+#+end_src
+
+** Install with NPM
+
+#+begin_src sh
+
+  npm install react-hot-toast
+
+#+end_src
+
+** Basic usage
+
+#+begin_src javascript
+
+  import toast, { Toaster } from 'react-hot-toast';
+
+  const notify = () => toast('Here is your toast.');
+
+  const App = () => {
+    return (
+      <div>
+        <button onClick={notify}>Make me a toast</button>
+        <Toaster />
+      </div>
+    );
+  };
+
+#+end_src

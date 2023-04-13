@@ -1,0 +1,11 @@
+#+title: Start Emacs From Scratch
+
+Be sure that you are in a folder that contains an empty =init.el= run the following in the terminal.
+
+#+begin_src sh
+
+  emacs -q -l init.el
+
+#+end_src
+
+This will open the vanilla emacs! Use this if you want to try new configurations.

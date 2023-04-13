@@ -1,0 +1,79 @@
+#+title: SQL Database
+
+* CREATE DATABASE
+
+#+begin_src sql
+
+  CREATE DATABASE databasename;
+
+#+end_src
+
+* DROP DATABASE
+
+#+begin_src sql
+
+  DROP DATABASE databasename;
+
+#+end_src
+
+* CREATE TABLE
+
+#+begin_src sql
+
+  CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+  );
+
+#+end_src
+
+* DROP TABLE
+
+#+begin_src sql
+
+  DROP TABLE tablename;
+
+#+end_src
+
+* ALTER TABLE
+
+The =ALTER TABLE= statement is used to add, delete, or modify columns in an existing table.
+
+** ADD Column
+
+#+begin_src sql
+
+  ALTER TABLE Customers
+  ADD Email varchar(255);
+
+#+end_src
+
+** DROP Column
+
+#+begin_src sql
+
+  ALTER TABLE Customers
+  DROP COLUMN Email;
+
+#+end_src
+
+** RENAME Column
+
+#+begin_src sql
+
+  ALTER TABLE tablename
+  RENAME COLUMN oldname to newname;
+
+#+end_src
+
+** ALTER/MODIFY DATATYPE
+
+#+begin_src sql
+
+  ALTER TABLE table_name
+  MODIFY COLUMN column_name datatype;
+
+#+end_src
