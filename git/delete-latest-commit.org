@@ -1,0 +1,32 @@
+#+title: Delete Latest Commit
+#+author: Jaj Dollesin
+
+To delete your latest commit locally so that you can pull changes first, you can use the following steps:
+
+1. *Soft reset your latest commit* (this will remove the commit but keep your changes in the working directory):
+
+   #+begin_src bash
+   git reset --soft HEAD~1
+   #+end_src
+
+   This command undoes the last commit but leaves your changes staged. After this, you can pull the changes from the remote repository.
+
+2. *Pull the latest changes* from the remote repository:
+
+   #+begin_src bash
+   git pull
+   #+end_src
+
+3. After pulling, you can now *recommit your changes*:
+
+   #+begin_src bash
+   git commit -m 'your commit message'
+   #+end_src
+
+4. Finally, you can *push the changes*:
+
+   #+begin_src bash
+   git push
+   #+end_src
+
+   This way, you don't lose your work, and you can successfully pull and push without conflicts.
