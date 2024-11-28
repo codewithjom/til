@@ -1,0 +1,6 @@
+#+title: Check Port
+#+author: Jaj Dollesin
+
+#+begin_src sql
+SHOW GLOBAL VARIABLES LIKE 'PORT';
+#+end_src
