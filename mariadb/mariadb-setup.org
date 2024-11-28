@@ -1,0 +1,25 @@
+#+title: Mariadb Setup
+#+author: Jaj Dollesin
+
+* Setup
+
+#+begin_src sh
+sudo pacman -S mariadb
+#+end_src
+
+Run the following command *before starting* the ~mariadb.service~:
+
+#+begin_src sh
+sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+sudo systemctl enable mariadb.service
+sudo systemctl start mariadb.service
+sudo mariadb-secure-installation
+#+end_src
+
+* Create User
+
+#+begin_src sh
+MariaDB> CREATE USER 'monty'@'localhost' IDENTIFIED BY 'some_pass';
+MariaDB> GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost';
+MariaDB> quit
+#+end_src
