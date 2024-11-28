@@ -1,0 +1,46 @@
+#+title: Prisma Setup
+#+author: Jaj Dollesin
+
+* Prisma Client
+
+#+begin_src sh
+npm install @prisma/client
+#+end_src
+
+If prisma not yet installed:
+#+begin_src sh
+npm install prisma
+npx prisma init
+#+end_src
+
+After creating models:
+#+begin_src sh
+npx prisma migrate dev
+#+end_src
+
+Prefer to create a file ~prisma.ts~:
+#+begin_src typescript
+import { PrismaClient } from "@prisma/client";
+
+let prisma: PrismaClient;
+declare global {
+  namespace NodeJS {
+    interface Global {
+      prisma?: PrismaClient;
+    }
+  }
+}
+
+const globalForPrisma = global as typeof globalThis & { prisma?: PrismaClient };
+
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient();
+} else {
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = new PrismaClient();
+  }
+  prisma = globalForPrisma.prisma;
+}
+
+export default prisma;
+#+end_src
