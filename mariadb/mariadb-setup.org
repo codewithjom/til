@@ -1,4 +1,4 @@
-#+title: Mariadb Setup
+#+title: MariaDB Setup
 #+author: Jaj Dollesin
 
 * Setup
