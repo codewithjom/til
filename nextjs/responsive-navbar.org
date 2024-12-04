@@ -1,0 +1,117 @@
+#+title: Responsive Navbar
+#+author: Jaj Dollesin
+
+#+begin_src javascript
+'use client'
+
+import { useState } from 'react'
+import { ModeToggle } from './ModeToggle'
+import Link from 'next/link'
+import LogoutButton from './LogoutButton'
+import Image from 'next/image'
+import { Button } from './ui/button'
+
+export default function NavbarUser() {
+  const [activeLink, setActiveLink] = useState<string>('')
+  const [menuOpen, setMenuOpen] = useState<boolean>(false)
+
+  const handleLinkClick = (link: string) => {
+    setActiveLink(link)
+    setMenuOpen(false)
+  }
+
+  return (
+    <nav className='h-14 flex items-center justify-between border-b border-zinc-300 px-4 md:px-6 dark:border-zinc-700 relative'>
+      <div className='flex items-center'>
+        <div className='mr-4 md:mr-6'>
+          <Image src='/ddc-logo.png' alt='DDC Logo' height={24} width={24} />
+        </div>
+        <div className='hidden md:flex'>
+          <ul className='dark:text-zinc-300 text-zinc-600 text-sm flex items-center space-x-4'>
+            <li
+              className={`cursor-pointer ${activeLink === '/user' ? 'dark:text-white text-zinc-900' : 'dark:hover:text-white'}`}
+              onClick={() => handleLinkClick('/user')}
+            >
+              <Link href='/user'>Dashboard</Link>
+            </li>
+            <li
+              className={`cursor-pointer ${activeLink === '/request' ? 'dark:text-white text-zinc-900' : 'dark:hover:text-white'}`}
+              onClick={() => handleLinkClick('/request')}
+            >
+              <Link href='/user/request'>Request</Link>
+            </li>
+            <li
+              className={`cursor-pointer ${activeLink === '/message' ? 'dark:text-white text-zinc-900' : 'dark:hover:text-white'}`}
+              onClick={() => handleLinkClick('/message')}
+            >
+              <Link href='/user/message'>Message</Link>
+            </li>
+            <li
+              className={`cursor-pointer ${activeLink === '/settings' ? 'dark:text-white text-zinc-900' : 'dark:hover:text-white'}`}
+              onClick={() => handleLinkClick('/settings')}
+            >
+              <Link href='/user/settings'>Settings</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className='flex items-center'>
+        <div>
+          <ModeToggle />
+        </div>
+        <div>
+          <LogoutButton />
+        </div>
+      </div>
+      <div className='md:hidden'>
+        <Button
+          variant='ghost'
+          className='text-zinc-600 dark:text-zinc-300 focus:outline-none'
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={2}
+            stroke='currentColor'
+            className='w-6 h-6'
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' d='M4 6h16M4 12h16m-7 6h7' />
+          </svg>
+        </Button>
+      </div>
+      {menuOpen && (
+        <div className='absolute top-14 right-4 w-52 bg-white dark:bg-zinc-800 rounded-md shadow-lg'>
+          <ul className='flex flex-col space-y-4 p-6 text-xl dark:text-zinc-300 text-zinc-600'>
+            <li
+              className={`cursor-pointer ${activeLink === '/user' ? 'dark:text-white text-zinc-900' : 'dark:hover:text-white'}`}
+              onClick={() => handleLinkClick('/user')}
+            >
+              <Link href='/user'>Dashboard</Link>
+            </li>
+            <li
+              className={`cursor-pointer ${activeLink === '/request' ? 'dark:text-white text-zinc-900' : 'dark:hover:text-white'}`}
+              onClick={() => handleLinkClick('/request')}
+            >
+              <Link href='/user/request'>Request</Link>
+            </li>
+            <li
+              className={`cursor-pointer ${activeLink === '/message' ? 'dark:text-white text-zinc-900' : 'dark:hover:text-white'}`}
+              onClick={() => handleLinkClick('/message')}
+            >
+              <Link href='/user/message'>Message</Link>
+            </li>
+            <li
+              className={`cursor-pointer ${activeLink === '/settings' ? 'dark:text-white text-zinc-900' : 'dark:hover:text-white'}`}
+              onClick={() => handleLinkClick('/settings')}
+            >
+              <Link href='/user/settings'>Settings</Link>
+            </li>
+          </ul>
+        </div>
+      )}
+    </nav>
+  )
+}
+#+end_src
