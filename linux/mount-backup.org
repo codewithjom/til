@@ -1,0 +1,67 @@
+#+title: Mount Backup
+#+author: Jaj Dollesin
+
+To permanently mount the HDD (~sda1~), you need to configure it in the ~/etc/fstab~ file. Here's a step-by-step guide:
+
+1. First, confirm the file system of the ~sda1~ partition.
+
+   #+begin_src sh
+     sudo blkid /dev/sda1
+   #+end_src
+
+   The output will show somthing lke this:
+
+   #+begin_src text
+     /dev/sda1: UUID="abcd-1234-efgh-5678" TYPE="ext4"
+   #+end_src
+
+2. Choose a directory where you want to mount the HDD. For example, to mount it under ~/mnt/backup~:
+
+   #+begin_src sh
+     sudo mkdir -p /mnt/backup
+   #+end_src
+
+3. Before modifying the ~fstab~ file, create a backup:
+
+   #+begin_src sh
+     sudo cp /etc/fstab /etc/fstab.backup
+   #+end_src
+
+4. Edit the ~fstab~ file:
+
+   #+begin_src sh
+     sudoedit /etc/fstab
+   #+end_src
+
+   Add the following line at the end of the file:
+
+   #+begin_src text
+     UUID=abcd-1234-efgh-5678 /mnt/backup ext4 defaults 0 2
+   #+end_src
+
+   - Replace ~abcd-1234-efgh-5678~ with the actual UUID from ~blkid~.
+   - If your HDD uses a different file system (e.g., ~ntfs~ or ~vfat~), adjust the ~ext4~ type accordingly.
+
+5. Run the following command to reload the ~fstab~ file and mount all listed partitions:
+
+   #+begin_src sh
+     sudo mount -a
+   #+end_src
+
+   Verify that the HDD is mounted at ~/mnt/backup~:
+
+   #+begin_src sh
+     ls /mnt/backup
+   #+end_src
+
+6. Reboot your system to ensure the HDD is mounted automatically:
+
+   #+begin_src sh
+     reboot
+   #+end_src
+
+   After the reboot, check the mount point again:
+
+   #+begin_src sh
+     ls /mnt/backup
+   #+end_src
