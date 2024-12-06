@@ -1,0 +1,6 @@
+#+title: Unmerge Command
+#+title: Jaj Dollesin
+
+#+begin_src sh
+  git reset --merge HEAD~1
+#+end_src
