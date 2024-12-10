@@ -6,8 +6,9 @@
   "workbench.startupEditor": "none",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "fluent-icons",
+  "workbench.colorTheme": "Andromeda",
 
-  "editor.fontSize": 16,
+  "editor.fontSize": 15,
   "editor.fontFamily": "Agave Nerd Font",
   "editor.tabSize": 2,
   "editor.fontLigatures": true,
@@ -23,7 +24,7 @@
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": -1,
 
-  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontSize": 15,
 
   "explorer.confirmDelete": false,
   "explorer.excludeGitIgnore": true,
