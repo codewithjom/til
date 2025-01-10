@@ -1,0 +1,3 @@
+#+begin_src sh
+ssh username@ipaddress
+#+end_src
