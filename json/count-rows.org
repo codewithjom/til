@@ -1,0 +1,14 @@
+#+title: Count Rows In JSON
+#+author: Jaj Dollesin
+
+#+begin_src sh
+sudo pacman -S jq
+#+end_src
+
+Run this command:
+
+#+begin_src sh
+jq '. | length' data.json
+# or
+jq '.users | length' data.json
+#+end_src
