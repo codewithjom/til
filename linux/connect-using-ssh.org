@@ -1,3 +1,6 @@
+#+title: Connect Using SSH
+#+author: Jaj Dollesin
+
 #+begin_src sh
 ssh username@ipaddress
 #+end_src
